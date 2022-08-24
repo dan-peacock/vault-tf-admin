@@ -1,4 +1,7 @@
-provider "vault" {}
+provider "vault" {
+  address = var.vault_address
+  token = var.vault_token
+}
 
 resource "vault_aws_secret_backend" "aws" {
   access_key = var.aws_access_key
