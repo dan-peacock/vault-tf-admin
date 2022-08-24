@@ -14,6 +14,6 @@ variable "aws_secret_key" {
   type = string
 }
 
-variable "path" {
+variable "name" {
   type = string
 }
