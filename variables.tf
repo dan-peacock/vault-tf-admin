@@ -1,5 +1,5 @@
-variable "vault_address" {
-    type = password
+variable "vault_token" {
+    type = string
 }
 
 variable "vault_address" {
@@ -11,5 +11,5 @@ variable "aws_access_key" {
 }
 
 variable "aws_secret_key" {
-  type = password
+  type = string
 }
