@@ -50,6 +50,6 @@ resource "vault_azure_secret_backend_role" "generated_role" {
 
   azure_roles {
     role_name = "Owner"
-    scope =  "/subscriptions/${var.azure_subscription_id}/resourceGroups/*"
+    scope =  "/subscriptions/${var.azure_subscription_id}/resourceGroups/"
   }
 }
