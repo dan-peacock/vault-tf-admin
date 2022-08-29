@@ -32,3 +32,21 @@ resource "vault_aws_secret_backend_role" "admin" {
 }
 EOF
 }
+
+resource "vault_azure_secret_backend" "azure" {
+  use_microsoft_graph_api = true
+  subscription_id         = var.azure_subscription_id
+  tenant_id               = var.azure_tenant_id
+  client_id               = var.azure_client_id
+  client_secret           = var.azure_client_secret
+  environment             = "AzurePublicCloud"
+}
+
+resource "vault_azure_secret_backend_role" "admin_azure" {
+  backend                         = vault_azure_secret_backend.azure.path
+  role                            = "admin"
+  bound_subscription_ids          = [var.azure_subscription_id]
+  token_ttl                       = 240
+  token_max_ttl                   = 720
+  token_policies                  = ["default", "dev", "prod"]
+}
