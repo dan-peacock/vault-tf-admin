@@ -42,11 +42,14 @@ resource "vault_azure_secret_backend" "azure" {
   environment             = "AzurePublicCloud"
 }
 
-resource "vault_azure_secret_backend_role" "admin_azure" {
-  backend                         = vault_azure_secret_backend.azure.path
-  role                            = "admin"
-  bound_subscription_ids          = [var.azure_subscription_id]
-  token_ttl                       = 240
-  token_max_ttl                   = 720
-  token_policies                  = ["default", "dev", "prod"]
+resource "vault_azure_secret_backend_role" "generated_role" {
+  backend                     = vault_azure_secret_backend.azure.path
+  role                        = "generated_role"
+  ttl                         = 300
+  max_ttl                     = 600
+
+  azure_roles {
+    role_name = "Owner"
+    scope =  "/subscriptions/${var.azure_subscription_id}/resourceGroups/*"
+  }
 }
