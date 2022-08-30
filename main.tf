@@ -33,23 +33,23 @@ resource "vault_aws_secret_backend_role" "admin" {
 EOF
 }
 
-resource "vault_azure_secret_backend" "azure" {
-  use_microsoft_graph_api = true
-  subscription_id         = var.azure_subscription_id
-  tenant_id               = var.azure_tenant_id
-  client_id               = var.azure_client_id
-  client_secret           = var.azure_client_secret
-  environment             = "AzurePublicCloud"
-}
+# resource "vault_azure_secret_backend" "azure" {
+#   use_microsoft_graph_api = true
+#   subscription_id         = var.azure_subscription_id
+#   tenant_id               = var.azure_tenant_id
+#   client_id               = var.azure_client_id
+#   client_secret           = var.azure_client_secret
+#   environment             = "AzurePublicCloud"
+# }
 
-resource "vault_azure_secret_backend_role" "generated_role" {
-  backend                     = vault_azure_secret_backend.azure.path
-  role                        = "generated_role"
-  ttl                         = 300
-  max_ttl                     = 600
+# resource "vault_azure_secret_backend_role" "generated_role" {
+#   backend                     = vault_azure_secret_backend.azure.path
+#   role                        = "generated_role"
+#   ttl                         = 300
+#   max_ttl                     = 600
 
-  azure_roles {
-    role_name = "Contributor"
-    scope =  "/subscriptions/${var.azure_subscription_id}"
-  }
-}
+#   azure_roles {
+#     role_name = "Contributor"
+#     scope =  "/subscriptions/${var.azure_subscription_id}"
+#   }
+# }
