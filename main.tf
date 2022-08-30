@@ -49,7 +49,7 @@ resource "vault_azure_secret_backend_role" "generated_role" {
   max_ttl                     = 600
 
   azure_roles {
-    role_name = "Owner"
+    role_name = "Contributor"
     scope =  "/subscriptions/${var.azure_subscription_id}"
   }
 }
